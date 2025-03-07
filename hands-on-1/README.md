@@ -1,5 +1,7 @@
 # Hands-on 1: Merge a simple sysext
 
+[![asciicast](https://asciinema.org/a/706911.svg)](https://asciinema.org/a/706911)
+
 Let's first download a simple sysext image that ships [`wasmtime`](https://wasmtime.dev/) environment.
 
 ```bash
