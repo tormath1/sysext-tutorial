@@ -17,7 +17,7 @@ Now we can move the image into `/etc/extensions`.
 :warning: The name of the image must match the name the extension name (i.e the suffix here: `usr/lib/extension-release.d/extension-release.wasmtime`)
 
 ```
-sudo mv wasmtime-24.0.0-x86-64.raw /etc/extensions
+sudo mv wasmtime-24.0.0-x86-64.raw /etc/extensions/wasmtime.raw
 ```
 
 It is now possible to merge the extensions:
