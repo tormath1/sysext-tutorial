@@ -32,7 +32,7 @@ CRI-O inside this directory: this will be applied as an overlayfs on the OS.
 
 ## Building the sysext
 
-From your the main `sysext-lab` system, clone the Git repo with the script:
+From the main `sysext-lab` system, clone the Git repo with the script:
 
 ```
 git clone https://github.com/tormath1/sysext-tutorial
