@@ -15,6 +15,8 @@ $ ssh labuserX@WW.XX.YY.ZZ
 labuserX@sysext-lab:~$ launch_flatcar
 ```
 
+The password for the `core` user is `core`.
+
 Otherwise, you can provision a system on any platform, using the
 [documentation](https://www.flatcar.org/docs/latest/installing/).
 

@@ -13,6 +13,8 @@ ssh labuserX@WW.XX.YY.ZZ
 labuserX@sysext-lab:~$ launch_fcos
 ```
 
+The password for the `core` user is `core`.
+
 Otherwise, you can provision a system on any platform, using the
 [documentation](https://docs.fedoraproject.org/en-US/fedora-coreos/).
 
