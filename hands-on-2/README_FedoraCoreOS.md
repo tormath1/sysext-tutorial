@@ -61,7 +61,7 @@ only.
 
 ## Test CRI-O
 
-You have extended your Flatcar instance with a new container runtime:
+You have extended your Fedora CoreOS instance with a new container runtime:
 
 ```
 $ sudo crictl --runtime-endpoint unix:///run/crio/crio.sock version
@@ -75,7 +75,8 @@ Version:  0.1.0
 RuntimeName:  containerd
 RuntimeVersion:  v1.7.23
 RuntimeApiVersion:  v1
-core@localhost ~ $ systemctl status crio
+
+$ systemctl status crio
 ● crio.service - Container Runtime Interface for OCI (CRI-O)
      Loaded: loaded (/usr/lib/systemd/system/crio.service; disabled; preset: disabled)
     Drop-In: /usr/lib/systemd/system/crio.service.d
