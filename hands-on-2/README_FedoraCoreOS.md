@@ -1,40 +1,75 @@
-# Hands-on 2: Build a simple sysext
+# Hands-on 2: Build a simple sysext on Fedora CoreOS
 
-In this hands-on, let's create a simple [CRI-O](https://cri-o.io/) image. CRI-O is a container runtime for Kubernetes, it can be used as a Containerd alternative.
+## Setting up a Fedora CoreOS virtual machine
 
-Let's open the file `create_crio.sh`. As you can see, it is only a succession of "mkdir", "cd", "echo". 
+For this hands on, we will be using a Fedora CoreOS system.
 
-We basically create a directory `usr/` and we put everything we need to run CRI-O inside this directory: this will be applied as overlayfs on the OS.
+If you are attending KubeCon London, you can connect to the lab system via SSH
+and then create a Fedora CoreOS virtual machine using the command `launch_fcos`:
 
-## Build the sysext
+```
+ssh labuserX@WW.XX.YY.ZZ
+...
+labuserX@sysext-lab:~$ launch_fcos
+```
 
-From your FCOS instance:
+Otherwise, you can provision a system on any platform, using the
+[documentation](https://docs.fedoraproject.org/en-US/fedora-coreos/).
+
+## Creating a sysext
+
+In this hands-on, let's create a simple [CRI-O](https://cri-o.io/) image. CRI-O
+is a container runtime for Kubernetes. It can be used as a Containerd
+alternative.
+
+Let's open the file `create_crio.sh`. As you can see, it is mostly a succession
+of "mkdir", "cd", "echo".
+
+We basically create a directory `usr/` and we put everything we need to run
+CRI-O inside this directory: this will be applied as an overlayfs on the OS.
+
+## Building the sysext
+
+From your the main `sysext-lab` system, clone the Git repo with the script:
+
 ```
 git clone https://github.com/tormath1/sysext-tutorial
 cd sysext-tutorial/hands-on-2
 ```
 
 Build the sysext:
+
 ```
-bash create_crio.sh
+./create_crio_FedoraCoreOS.sh
 ```
 
-Upload the sysext to the Flatcar instance and merge it to the system:
+## Get the system extension to the Virtual Machine
+
+Upload the sysext to the Fedora CoreOS instance and merge it to the system:
+
 ```
-scp crio.raw flatcar:/home/core/crio.raw
-ssh flatcar
-sudo mv crio.raw /etc/extensions
-# refresh and not 'merge' because some extensions are already loaded by default
-sudo systemd-sysext refresh
+scp crio.raw core@WW.XX.YY.ZZ:crio.raw
+ssh core@WW.XX.YY.ZZ
+sudo install -d -m 0755 -o 0 -g 0 -Z /var/lib/extensions
+sudo mv crio.raw /var/lib/extensions
+sudo systemctl restart systemd-sysext.service
 ```
+
+:warning: We can not use `sudo systemd-sysext merge` directly here as there is
+an incompatibility between systemd and SELinux that is fixed in systemd v257
+only.
+
+## Test CRI-O
 
 You have extended your Flatcar instance with a new container runtime:
+
 ```
 $ sudo crictl --runtime-endpoint unix:///run/crio/crio.sock version
 Version:  0.1.0
 RuntimeName:  cri-o
 RuntimeVersion:  1.32.2
 RuntimeApiVersion:  v1
+
 $ sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock version
 Version:  0.1.0
 RuntimeName:  containerd
@@ -68,6 +103,9 @@ Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.627951853Z" leve
 Mar 13 14:26:57 localhost systemd[1]: Started crio.service - Container Runtime Interface for OCI (CRI-O).
 ```
 
-Resources:
-* https://github.com/flatcar/sysext-bakery/blob/main/create_crio_sysext.sh
-* https://man7.org/linux/man-pages/man8/systemd-sysext.8.html
+## Resources
+
+* [Example sysexts for Fedora CoreOS](https://github.com/travier/fedora-sysexts)
+* [Flatcar's sysext bakery](https://github.com/flatcar/sysext-bakery/blob/main/create_crio_sysext.sh)
+* [systemd-sysext man page on man7.org](https://man7.org/linux/man-pages/man8/systemd-sysext.8.html)
+* [systemd-sysext man page on fdo.org](https://www.freedesktop.org/software/systemd/man/latest/systemd-sysext.html)
