@@ -42,6 +42,7 @@ rm -rf "${SYSEXTNAME}/tmp"
 mkdir -p "${SYSEXTNAME}"/usr/lib/systemd/system
 mv "${SYSEXTNAME}"/etc/systemd/system/crio.service \
     "${SYSEXTNAME}"/usr/lib/systemd/system/crio.service
+rm -rf "${SYSEXTNAME}"/etc
 
 # Create some configuration for CRI-O (can be set via Ignition too)
 echo Generating CRI-O "${VERSION}" default configuration
