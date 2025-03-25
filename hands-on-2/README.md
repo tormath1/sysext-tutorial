@@ -72,5 +72,5 @@ Mar 13 14:26:57 localhost systemd[1]: Started crio.service - Container Runtime I
 
 
 Resources:
-* https://github.com/flatcar/sysext-bakery/blob/main/create_crio_sysext.sh
+* https://github.com/flatcar/sysext-bakery/blob/main/crio.sysext/create.sh
 * https://man7.org/linux/man-pages/man8/systemd-sysext.8.html
