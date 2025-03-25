@@ -38,12 +38,16 @@ DESTDIR="${PWD}/../../../${SYSEXTNAME}" \
 cd -
 rm -rf "${SYSEXTNAME}/tmp"
 
+# Move systemd unit from /etc to /usr
+mkdir -p "${SYSEXTNAME}"/usr/lib/systemd/system
+mv "${SYSEXTNAME}"/etc/systemd/system/crio.service \
+    "${SYSEXTNAME}"/usr/lib/systemd/system/crio.service
+
 # Create some configuration for CRI-O (can be set via Ignition too)
 echo Generating CRI-O "${VERSION}" default configuration
 cat > "${SYSEXTNAME}"/usr/share/crio/etc/crio/crio.conf <<'EOF'
 # /etc/crio/crio.conf - Configuration file for crio
 # See /etc/crio/crio.conf.d/ for additional config files
-#
 EOF
 
 # Create the Systemd unit and configuration files
