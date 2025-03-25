@@ -7,9 +7,11 @@ VERSION="v1.32.2"
 
 # Cleanup any leftovers.
 rm -fr "cri-o.${ARCH}.${VERSION}.tar.gz" "${SYSEXTNAME}" "${SYSEXTNAME}".raw
+
 # Download CRI-O release.
 echo Downloading CRI-O "${VERSION}"
 curl -o "cri-o.${ARCH}.${VERSION}.tar.gz" -fsSL "https://storage.googleapis.com/cri-o/artifacts/cri-o.${ARCH}.${VERSION}.tar.gz"
+
 # Prepare sysext folder to unpack the CRI-O release.
 mkdir -p "${SYSEXTNAME}" "${SYSEXTNAME}/tmp"
 
@@ -17,9 +19,22 @@ mkdir -p "${SYSEXTNAME}" "${SYSEXTNAME}/tmp"
 echo Installing CRI-O "${VERSION}" into a temporary location
 tar --force-local -xf "cri-o.${ARCH}.${VERSION}.tar.gz" -C "${SYSEXTNAME}/tmp"
 cd "${SYSEXTNAME}/tmp/cri-o/"
-sed -i '/^sed -i.*DESTDIR/d' install # removes sed replacements from install script to keep the default location (/usr) in the base config file
-DESTDIR="${PWD}/../../../${SYSEXTNAME}" PREFIX=/usr ETCDIR=$PREFIX/share/crio/etc OCIDIR=$PREFIX/share/oci-umount/oci-umount.d \
-  CNIDIR=$PREFIX/share/crio/cni/etc/net.d/ OPT_CNI_BIN_DIR=$PREFIX/share/crio/cni/bin/  BASHINSTALLDIR=/tmp FISHINSTALLDIR=/tmp ZSHINSTALLDIR=/tmp MANDIR=/tmp ./install 
+
+# Removes sed replacements from install script to keep the default location
+# (/usr) in the base config file
+sed -i '/^sed -i.*DESTDIR/d' install
+
+DESTDIR="${PWD}/../../../${SYSEXTNAME}" \
+    PREFIX=/usr \
+    ETCDIR=$PREFIX/share/crio/etc \
+    OCIDIR=$PREFIX/share/oci-umount/oci-umount.d \
+    CNIDIR=$PREFIX/share/crio/cni/etc/net.d/ \
+    OPT_CNI_BIN_DIR=$PREFIX/share/crio/cni/bin/ \
+    BASHINSTALLDIR=/tmp \
+    FISHINSTALLDIR=/tmp \
+    ZSHINSTALLDIR=/tmp \
+    MANDIR=/tmp \
+    ./install
 cd -
 rm -rf "${SYSEXTNAME}/tmp"
 
@@ -27,7 +42,7 @@ rm -rf "${SYSEXTNAME}/tmp"
 echo Generating CRI-O "${VERSION}" default configuration
 cat > "${SYSEXTNAME}"/usr/share/crio/etc/crio/crio.conf <<'EOF'
 # /etc/crio/crio.conf - Configuration file for crio
-# See /etc/crio/crio.conf.d/ for additional config files 
+# See /etc/crio/crio.conf.d/ for additional config files
 #
 EOF
 
