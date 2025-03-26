@@ -1,4 +1,4 @@
-# Hands-on 1: Merge a simple sysext on Flatcar Container Linux
+# Hands-on 1: Use a sysext with wasmtime on Flatcar Container Linux
 
 [![asciicast](https://asciinema.org/a/706911.svg)](https://asciinema.org/a/706911)
 
@@ -33,6 +33,7 @@ wget https://github.com/flatcar/sysext-bakery/releases/download/latest/wasmtime-
 
 Before merging the system extension with the system, we can inspect the content
 of the image:
+
 ```
 sudo systemd-dissect wasmtime-24.0.0-x86-64.raw --list
 ```

@@ -1,4 +1,4 @@
-# Hands-on 2: Build a simple sysext on Fedora CoreOS
+# Hands-on 2: Build a sysext for CRI-O for Fedora CoreOS
 
 ## Setting up a Fedora CoreOS virtual machine
 
@@ -20,15 +20,16 @@ Otherwise, you can provision a system on any platform, using the
 
 ## Creating a sysext
 
-In this hands-on, let's create a simple [CRI-O](https://cri-o.io/) image. CRI-O
-is a container runtime for Kubernetes. It can be used as a Containerd
-alternative.
+In this hands-on, let's create a simple [CRI-O](https://cri-o.io/) system
+extension. CRI-O is a container runtime for Kubernetes. It can be used as a
+containerd alternative.
 
-Let's open the file `create_crio.sh`. As you can see, it is mostly a succession
-of "mkdir", "cd", "echo".
+Let's open the file `create_crio_FedoraCoreOS.sh`. As you can see, it is mostly
+a succession of "mkdir", "cd", "echo".
 
-We basically create a directory `usr/` and we put everything we need to run
-CRI-O inside this directory: this will be applied as an overlayfs on the OS.
+We download and extract the Fedora RPM for CRI-O and crit-tools into a
+directory and setup a few configuration files. This will be applied as an
+overlayfs on the OS.
 
 ## Building the sysext
 

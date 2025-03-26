@@ -1,4 +1,4 @@
-# Hands-on 1: Merge a simple sysext on Fedora CoreOS
+# Hands-on 1: Use a sysext with wasmtime on Fedora CoreOS
 
 ## Setting up a Fedora CoreOS virtual machine
 
@@ -31,6 +31,7 @@ curl -O --location https://github.com/travier/fedora-sysexts/releases/download/f
 
 Before merging the system extension with the system, we can inspect the content
 of the image:
+
 ```
 sudo systemd-dissect wasmtime-41.20250302.3.2-x86-64.raw --list
 ```
