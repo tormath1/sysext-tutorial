@@ -24,7 +24,7 @@ Let's first download a simple sysext image that includes
 [`wastime`](https://wasmtime.dev/):
 
 ```bash
-wget https://github.com/travier/fedora-sysexts/releases/download/fedora-coreos-stable/wasmtime-41.20250302.3.2-x86-64.raw
+curl -O --location https://github.com/travier/fedora-sysexts/releases/download/fedora-coreos-stable/wasmtime-41.20250302.3.2-x86-64.raw
 ```
 
 ## Inspecting its content
