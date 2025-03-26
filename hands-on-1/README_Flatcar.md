@@ -10,7 +10,7 @@ If you are attending KubeCon London, you can connect to the lab system via SSH
 and then create a Flatcar virtual machine using the command `launch_flatcar`:
 
 ```
-$ ssh labuserX@WW.XX.YY.ZZ
+ssh labuserX@WW.XX.YY.ZZ
 ...
 labuserX@sysext-lab:~$ launch_flatcar
 ```

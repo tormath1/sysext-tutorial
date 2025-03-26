@@ -8,7 +8,7 @@ control plane:
 If you are attending KubeCon London, you can connect to the lab system via SSH:
 
 ```
-$ ssh labuserX@WW.XX.YY.ZZ
+ssh labuserX@WW.XX.YY.ZZ
 ...
 ```
 
@@ -79,7 +79,7 @@ If you are attending KubeCon London, you can start the Flatcar control-plane VM
 on the lab system via:
 
 ```
-$ ssh labuserX@WW.XX.YY.ZZ
+ssh labuserX@WW.XX.YY.ZZ
 ...
 launch_flatcar -i ./control-plane.json
 ```
@@ -162,7 +162,7 @@ If you are attending KubeCon London, you can start the Fedora CoreOS worker VM
 on the lab system via:
 
 ```
-$ ssh labuserX@WW.XX.YY.ZZ
+ssh labuserX@WW.XX.YY.ZZ
 ...
 launch_fcos -i ./worker.json
 ```
