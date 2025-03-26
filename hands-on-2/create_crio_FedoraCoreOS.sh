@@ -18,7 +18,6 @@ done
 
 echo "Moving default config from /etc to /usr/etc"
 sudo mv etc usr
-sudo sed -i 's/$CRIO_CONFIG_OPTIONS/--config \/usr\/etc\/crio\/crio.conf/' usr/lib/systemd/system/crio.service
 
 echo "Setting up systemd configuration to start the service on boot"
 sudo install -d -m 0755 -o 0 -g 0 usr/lib/systemd/system/multi-user.target.d
