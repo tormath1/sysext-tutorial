@@ -68,6 +68,7 @@ You have extended your Fedora CoreOS instance with a new container runtime:
 
 ```
 $ sudo crictl --runtime-endpoint unix:///run/crio/crio.sock version
+WARN[0000] Config "/etc/crictl.yaml" does not exist, trying next: "/usr/bin/crictl.yaml"
 Version:  0.1.0
 RuntimeName:  cri-o
 RuntimeVersion:  1.32.2
@@ -76,29 +77,28 @@ RuntimeApiVersion:  v1
 $ systemctl status crio
 ● crio.service - Container Runtime Interface for OCI (CRI-O)
      Loaded: loaded (/usr/lib/systemd/system/crio.service; disabled; preset: disabled)
-    Drop-In: /usr/lib/systemd/system/crio.service.d
-             └─10-crio.conf
-     Active: active (running) since Thu 2025-03-13 14:26:57 UTC; 2min 27s ago
+    Drop-In: /usr/lib/systemd/system/service.d
+             └─10-timeout-abort.conf, 50-keep-warm.conf
+     Active: active (running) since Wed 2025-03-26 18:40:12 UTC; 11min ago
+ Invocation: 3054df2e1b454200a5205ab5450cb347
        Docs: https://github.com/cri-o/cri-o
-    Process: 1789 ExecStartPre=/usr/bin/mkdir -p /opt/cni/bin /etc/crio/crio.conf.d/ /etc/cni/net.d/ /var/log/crio (code=exited, status=0/SUCCESS)
-    Process: 1791 ExecStartPre=/usr/bin/rsync -ur /usr/share/crio/etc/ /etc/ (code=exited, status=0/SUCCESS)
-   Main PID: 1794 (crio)
+   Main PID: 3236 (crio)
       Tasks: 9
-     Memory: 79.1M (peak: 79.6M)
-        CPU: 632ms
+     Memory: 74.5M (peak: 74.9M)
+        CPU: 485ms
      CGroup: /system.slice/crio.service
-             └─1794 /usr/bin/crio --config-dir /etc/crio/crio.conf.d/
+             └─3236 /usr/bin/crio
 
-Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.626739859Z" level=info msg="Registered SIGHUP reload watcher"
-Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.626811023Z" level=info msg="Starting seccomp notifier watcher"
-Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.626950036Z" level=info msg="Create NRI interface"
-Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.627192074Z" level=info msg="runtime interface created"
-Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.627279821Z" level=info msg="Registered domain \"k8s.io\" with NRI"
-Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.62730498Z" level=info msg="runtime interface starting up..."
-Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.627688995Z" level=info msg="starting plugins..."
-Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.627743385Z" level=info msg="Synchronizing NRI (plugin) with current runtime state"
-Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.627951853Z" level=info msg="No systemd watchdog enabled"
-Mar 13 14:26:57 localhost systemd[1]: Started crio.service - Container Runtime Interface for OCI (CRI-O).
+Mar 26 18:46:42 localhost.localdomain crio[3236]: time="2025-03-26T18:46:42.128673735Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
+Mar 26 18:47:12 localhost.localdomain crio[3236]: time="2025-03-26T18:47:12.12958086Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
+Mar 26 18:47:42 localhost.localdomain crio[3236]: time="2025-03-26T18:47:42.131053479Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
+Mar 26 18:48:12 localhost.localdomain crio[3236]: time="2025-03-26T18:48:12.132510373Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
+Mar 26 18:48:42 localhost.localdomain crio[3236]: time="2025-03-26T18:48:42.133747858Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
+Mar 26 18:49:12 localhost.localdomain crio[3236]: time="2025-03-26T18:49:12.135358349Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
+Mar 26 18:49:42 localhost.localdomain crio[3236]: time="2025-03-26T18:49:42.137552449Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
+Mar 26 18:50:12 localhost.localdomain crio[3236]: time="2025-03-26T18:50:12.142069846Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
+Mar 26 18:50:42 localhost.localdomain crio[3236]: time="2025-03-26T18:50:42.143358305Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
+Mar 26 18:51:12 localhost.localdomain crio[3236]: time="2025-03-26T18:51:12.145588077Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
 ```
 
 ## Resources
