@@ -73,7 +73,7 @@ wasmtime --version
 Then let's get an example WASI application and run it with `wasmtime`:
 
 ```
-$ curl -O --location ...
+$ curl -O --location https://github.com/tormath1/sysext-tutorial/raw/refs/heads/main/hands-on-1/wasi_hello_world.wasm
 $ mkdir helloworld
 $ wasmtime run --dir=$PWD::/ wasi_hello_world.wasm
 Hello KubeCon London 2025!
@@ -85,8 +85,3 @@ Hello KubeCon London 2025!
 
 * [systemd-sysext man page on man7.org](https://man7.org/linux/man-pages/man8/systemd-sysext.8.html)
 * [systemd-sysext man page on fdo.org](https://www.freedesktop.org/software/systemd/man/latest/systemd-sysext.html)
-
-WASM example inspired by:
-
-- [WASI Hello World, Wasm By Example](https://wasmbyexample.dev/examples/wasi-hello-world/wasi-hello-world.rust.en-us.html)
-* Updated for [Redesign Wasmtime's CLI flags](https://github.com/bytecodealliance/wasmtime/issues/6741)
