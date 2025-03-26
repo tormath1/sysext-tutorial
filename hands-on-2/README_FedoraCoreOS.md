@@ -1,5 +1,7 @@
 # Hands-on 2: Build a sysext for CRI-O for Fedora CoreOS
 
+[![asciicast](https://asciinema.org/a/710127.svg)](https://asciinema.org/a/710127)
+
 ## Setting up a Fedora CoreOS virtual machine
 
 For this hands on, we will be using a Fedora CoreOS system.
