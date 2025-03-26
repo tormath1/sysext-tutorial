@@ -1,5 +1,7 @@
 # Hands-on 1: Use a sysext with wasmtime on Fedora CoreOS
 
+[![asciicast](https://asciinema.org/a/710119.svg)](https://asciinema.org/a/710119)
+
 ## Setting up a Fedora CoreOS virtual machine
 
 For this hands on, we will be using a Fedora CoreOS system.
