@@ -5,3 +5,4 @@ For the slides and context, see:
 
 * [Hands-on 1: Use a sysext on Fedora CoreOS](./hands-on-1)
 * [Hands-on 2: Build a sysext for CRI-O for Flatcar Container Linux](./hands-on-2)
+* [Hands-on 3: Setup a small Kubernetes Cluster with Flatcar and Fedora CoreOS nodes, using sysexts](./hands-on-3)
