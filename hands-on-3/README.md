@@ -18,8 +18,14 @@ Kubernetes sysexts are already available for Flatcar Container Linux, so you
 only need to provision a Flatcar instance with the following configuration:
 
 ```yaml
-version: 1.1.0
 variant: flatcar
+version: 1.1.0
+passwd:
+  users:
+    - name: core
+      password_hash: $y$j9T$hCQJnZ9k0Al6j6rd9H59X1$n2b6ycQDiVL5POfwtfLBue9shrrVN3zzzMZ37Kia090
+      ssh_authorized_keys:
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAT23SVMyX5QOh3RzUpiVLO5f7MzhenlN0zjtWsncdqE labuser@sysext-lab
 storage:
   links:
     - target: /opt/extensions/kubernetes/kubernetes-v1.32.2-x86-64.raw
@@ -105,7 +111,7 @@ passwd:
     - name: core
       password_hash: $y$j9T$hCQJnZ9k0Al6j6rd9H59X1$n2b6ycQDiVL5POfwtfLBue9shrrVN3zzzMZ37Kia090
       ssh_authorized_keys:
-        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAT23SVMyX5QOh3RzUpiVLO5f7MzhenlN0zjtWsncdqE labuser@fcos-sysext-lab
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAT23SVMyX5QOh3RzUpiVLO5f7MzhenlN0zjtWsncdqE labuser@sysext-lab
 storage:
   directories:
     - path: /etc/sysupdate.d
