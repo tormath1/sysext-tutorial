@@ -73,12 +73,6 @@ RuntimeName:  cri-o
 RuntimeVersion:  1.32.2
 RuntimeApiVersion:  v1
 
-$ sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock version
-Version:  0.1.0
-RuntimeName:  containerd
-RuntimeVersion:  v1.7.23
-RuntimeApiVersion:  v1
-
 $ systemctl status crio
 ● crio.service - Container Runtime Interface for OCI (CRI-O)
      Loaded: loaded (/usr/lib/systemd/system/crio.service; disabled; preset: disabled)
