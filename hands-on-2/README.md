@@ -105,7 +105,7 @@ Mar 13 14:26:57 localhost systemd[1]: Started crio.service - Container Runtime I
 
 ## Resources
 
-* [Flatcar's sysext bakery](https://github.com/flatcar/sysext-bakery/blob/main/create_crio_sysext.sh)
+* [Flatcar's sysext bakery](https://github.com/flatcar/sysext-bakery/tree/main/crio.sysext)
 * [systemd-sysext man page on man7.org](https://man7.org/linux/man-pages/man8/systemd-sysext.8.html)
 * [systemd-sysext man page on fdo.org](https://www.freedesktop.org/software/systemd/man/latest/systemd-sysext.html)
 * [Example sysexts for Fedora CoreOS](https://github.com/travier/fedora-sysexts)
