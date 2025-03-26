@@ -185,8 +185,8 @@ and from the worker node, you can paste the result of the command above:
 sudo kubeadm join ... --node-name fcos-worker-01
 ```
 
-Congratulations, you have deployed a Kubernetes cluster on Flatcar / FCOS using
-systemd system extensions!
+Congratulations, you have deployed a Kubernetes cluster on Flatcar and Fedora
+CoreOS using systemd system extensions!
 
 ```
 core@localhost ~ $ kubectl get nodes -o wide
