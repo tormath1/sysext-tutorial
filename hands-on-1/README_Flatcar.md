@@ -62,11 +62,29 @@ systemd-sysext status
 
 ## Testing out wasmtime
 
+Let's make sure that `wasmtime` is now available:
+
 ```
 wasmtime --version
+```
+
+Then let's get an example WASI application and run it with `wasmtime`:
+
+```
+$ curl -O --location ...
+$ mkdir helloworld
+$ wasmtime run --dir=$PWD::/ wasi_hello_world.wasm
+Hello KubeCon London 2025!
+$ cat helloworld/helloworld.txt
+Hello KubeCon London 2025!
 ```
 
 ## Resources
 
 * [systemd-sysext man page on man7.org](https://man7.org/linux/man-pages/man8/systemd-sysext.8.html)
 * [systemd-sysext man page on fdo.org](https://www.freedesktop.org/software/systemd/man/latest/systemd-sysext.html)
+
+WASM example inspired by:
+
+- [WASI Hello World, Wasm By Example](https://wasmbyexample.dev/examples/wasi-hello-world/wasi-hello-world.rust.en-us.html)
+* Updated for [Redesign Wasmtime's CLI flags](https://github.com/bytecodealliance/wasmtime/issues/6741)
