@@ -1,9 +1,8 @@
 # Hands-on 3: Setup a small Kubernetes Cluster with Flatcar and Fedora CoreOS nodes, using sysexts
 
-For this hands on, we will deploy a Kubernetes cluster with 1 node and 1
-control plane:
+For this hands on, we will deploy a Kubernetes cluster with two nodes:
 
-* one Flatcar Container Linux system as control-plane
+* one Flatcar Container Linux system as control-plane node
 * one Fedora CoreOS system as worker node
 
 If you are attending KubeCon London, you can connect to the lab system via SSH:

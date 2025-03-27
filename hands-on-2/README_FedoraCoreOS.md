@@ -115,7 +115,7 @@ Mar 26 18:51:12 localhost.localdomain crio[3236]: time="2025-03-26T18:51:12.1455
 You can exit the Virtual Machine by shutting it down:
 
 ```
-[core@fedora-coreos ~]$  sudo poweroff
+[core@fedora-coreos ~]$ sudo poweroff
 ```
 
 Or by disconnecting from the console with `Ctrl + ]` and then destroying the
