@@ -12,10 +12,10 @@ ssh labuserX@WW.XX.YY.ZZ
 
 ## Setting up a Fedora CoreOS virtual machine
 
-For this hands on, we will be using a Fedora CoreOS system.
+For this hands on, we will be using a Flatcar Container Linux system.
 
 You can create a Flatcar Container Linux virtual machine using the command
-`launch_fcos`:
+`launch_flatcar`:
 
 ```
 labuserX@sysext-lab:~$ launch_flatcar
