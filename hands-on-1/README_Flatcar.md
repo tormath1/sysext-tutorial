@@ -103,7 +103,7 @@ virtual machine:
 ```
 # Get the name of the virtual machine
 virsh list
-virsh destroy flatcars-labuserX
+virsh destroy flatcar-labuserX
 ```
 
 ## Resources
