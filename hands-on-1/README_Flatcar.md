@@ -19,6 +19,8 @@ virtual machine using the command `launch_fcos`:
 
 ```
 labuserX@sysext-lab:~$ launch_flatcar
+...
+core@flatcar ~ $
 ```
 
 The password for the `core` user is `core`.
@@ -35,7 +37,7 @@ Let's first download a simple sysext image that includes
 [`wastime`](https://wasmtime.dev/):
 
 ```bash
-wget https://github.com/flatcar/sysext-bakery/releases/download/latest/wasmtime-24.0.0-x86-64.raw
+core@flatcar ~ $ wget https://github.com/flatcar/sysext-bakery/releases/download/latest/wasmtime-24.0.0-x86-64.raw
 ```
 
 ## Inspecting its content
@@ -44,7 +46,7 @@ Before merging the system extension with the system, we can inspect the content
 of the image:
 
 ```
-sudo systemd-dissect wasmtime-24.0.0-x86-64.raw --list
+core@flatcar ~ $ sudo systemd-dissect --list wasmtime-24.0.0-x86-64.raw
 ```
 
 ## Setting up the system extension
@@ -53,8 +55,8 @@ Now we can move the image into `/var/lib/extensions` so that it will be taken
 into account by `systemd-sysext`:
 
 ```
-sudo install -d -m 0755 -o 0 -g 0 -Z /var/lib/extensions
-sudo mv wasmtime-24.0.0-x86-64.raw /etc/extensions/wasmtime.raw
+core@flatcar ~ $ sudo install -d -m 0755 -o 0 -g 0 -Z /var/lib/extensions
+core@flatcar ~ $ sudo mv wasmtime-24.0.0-x86-64.raw /etc/extensions/wasmtime.raw
 ```
 
 :warning: The name of the image must match the name the extension name (i.e the
@@ -65,8 +67,8 @@ suffix here: `/usr/lib/extension-release.d/extension-release.wasmtime`)
 It is now possible to merge the extensions:
 
 ```
-sudo systemd-sysext merge
-systemd-sysext status
+core@flatcar ~ $ sudo systemd-sysext merge
+core@flatcar ~ $ systemd-sysext status
 ```
 
 ## Testing out wasmtime
@@ -74,17 +76,17 @@ systemd-sysext status
 Let's make sure that `wasmtime` is now available:
 
 ```
-wasmtime --version
+core@flatcar ~ $ wasmtime --version
 ```
 
 Then let's get an example WASI application and run it with `wasmtime`:
 
 ```
-$ curl -O --location https://github.com/tormath1/sysext-tutorial/raw/refs/heads/main/hands-on-1/wasi_hello_world.wasm
-$ mkdir helloworld
-$ wasmtime run --dir=$PWD::/ wasi_hello_world.wasm
+core@flatcar ~ $ curl -O --location https://github.com/tormath1/sysext-tutorial/raw/refs/heads/main/hands-on-1/wasi_hello_world.wasm
+core@flatcar ~ $ mkdir helloworld
+core@flatcar ~ $ wasmtime run --dir=$PWD::/ wasi_hello_world.wasm
 Hello KubeCon London 2025!
-$ cat helloworld/helloworld.txt
+core@flatcar ~ $ cat helloworld/helloworld.txt
 Hello KubeCon London 2025!
 ```
 
@@ -94,16 +96,14 @@ If you are attending KubeCon London, you can exit the Virtual Machine
 by shutting it down:
 
 ```
-sudo poweroff
+core@flatcar ~ $ sudo poweroff
 ```
 
 Or by disconnecting from the console with `Ctrl + ]` and then destroying the
 virtual machine:
 
 ```
-# Get the name of the virtual machine
-virsh list
-virsh destroy flatcar-labuserX
+labuserX@sysext-lab:~$ virsh destroy flatcar-labuserX
 ```
 
 ## Resources
