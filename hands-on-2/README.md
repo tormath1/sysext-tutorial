@@ -43,8 +43,7 @@ labuserX@sysext-lab:~$ ./create_crio.sh
 
 We will now setup a Flatcar Container Linux virtual machine.
 
-If you are attending KubeCon London, you can create a Flatcar virtual machine
-using the command `launch_flatcar`:
+You can create a Flatcar virtual machine using the command `launch_flatcar`:
 
 ```
 labuserX@sysext-lab:~$ launch_flatcar
@@ -133,8 +132,7 @@ Mar 13 14:26:57 localhost systemd[1]: Started crio.service - Container Runtime I
 
 ## Wrapping up the hands on
 
-If you are attending KubeCon London, you can exit the Virtual Machine
-by shutting it down:
+You can exit the Virtual Machine by shutting it down:
 
 ```
 core@flatcar ~ $ sudo poweroff

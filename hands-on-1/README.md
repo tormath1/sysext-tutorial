@@ -14,8 +14,7 @@ ssh labuserX@WW.XX.YY.ZZ
 
 For this hands on, we will be using a Fedora CoreOS system.
 
-If you are attending KubeCon London, you can create a Fedora CoreOS virtual
-machine using the command `launch_fcos`:
+You can create a Fedora CoreOS virtual machine using the command `launch_fcos`:
 
 ```
 labuserX@sysext-lab:~$ launch_fcos
@@ -96,8 +95,7 @@ Hello KubeCon London 2025!
 
 ## Wrapping up the hands on
 
-You can exit the Virtual Machine
-by shutting it down:
+You can exit the Virtual Machine by shutting it down:
 
 ```
 [core@fedora-coreos ~]$ sudo poweroff

@@ -85,8 +85,7 @@ generate the Ignition configuration:
 labuserX@sysext-lab:~$ butane < control-plane.yaml > control-plane.json
 ```
 
-If you are attending KubeCon London, you can start the Flatcar control-plane VM
-on the lab system via:
+You can start the Flatcar control-plane virtual machine on the lab system via:
 
 ```
 labuserX@sysext-lab:~$ launch_flatcar -i ./control-plane.json
@@ -170,7 +169,7 @@ Ignition configuration:
 labuserX@sysext-lab:~$ butane < worker.yaml > worker.json
 ```
 
-You can start the Fedora CoreOS worker VM on the lab system via:
+You can start the Fedora CoreOS worker virtual machine on the lab system via:
 
 ```
 labuserX@sysext-lab:~$ launch_fcos -i ./worker.json

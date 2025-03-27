@@ -14,8 +14,8 @@ ssh labuserX@WW.XX.YY.ZZ
 
 For this hands on, we will be using a Fedora CoreOS system.
 
-If you are attending KubeCon London, you can create a Flatcar Container Linux
-virtual machine using the command `launch_fcos`:
+You can create a Flatcar Container Linux virtual machine using the command
+`launch_fcos`:
 
 ```
 labuserX@sysext-lab:~$ launch_flatcar
