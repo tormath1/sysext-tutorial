@@ -41,6 +41,10 @@ storage:
     - path: /opt/extensions/kubernetes/kubernetes-v1.32.2-x86-64.raw
       contents:
         source: https://github.com/flatcar/sysext-bakery/releases/download/kubernetes-v1.32.2/kubernetes-v1.32.2-x86-64.raw
+    - path: /etc/hostname
+      contents:
+        inline: |
+          flatcar-cp
 systemd:
   units:
     - name: systemd-sysupdate.timer
@@ -66,7 +70,7 @@ systemd:
         After=containerd.service
         ConditionPathExists=!/etc/kubernetes/kubelet.conf
         [Service]
-        ExecStartPre=/usr/bin/kubeadm init --node-name flatcar-cp --ignore-preflight-errors=NumCPU,Mem
+        ExecStartPre=/usr/bin/kubeadm init --ignore-preflight-errors=NumCPU,Mem
         ExecStartPre=/usr/bin/mkdir /home/core/.kube
         ExecStartPre=/usr/bin/cp /etc/kubernetes/admin.conf /home/core/.kube/config
         ExecStart=/usr/bin/chown -R core:core /home/core/.kube
@@ -182,7 +186,7 @@ kubeadm token create --print-join-command
 and from the worker node, you can paste the result of the command above:
 
 ```
-sudo kubeadm join ... --node-name fcos-worker-01
+sudo kubeadm join ...
 ```
 
 Congratulations, you have deployed a Kubernetes cluster on Flatcar and Fedora
@@ -190,9 +194,9 @@ CoreOS using systemd system extensions!
 
 ```
 core@localhost ~ $ kubectl get nodes -o wide
-NAME              STATUS     ROLES           AGE   VERSION   INTERNAL-IP       EXTERNAL-IP   OS-IMAGE                                             KERNEL-VERSION           CONTAINER-RUNTIME
-fcos-worker-01    NotReady   <none>          4s    v1.32.3   192.168.124.103   <none>        Fedora CoreOS 41.20250302.3.2                        6.13.5-200.fc41.x86_64   cri-o://1.32.2
-flatcar-cp        NotReady   control-plane   23m   v1.32.2   192.168.124.254   <none>        Flatcar Container Linux by Kinvolk 4152.2.2 (Oklo)   6.6.83-flatcar           containerd://1.7.23
+NAME                  STATUS     ROLES           AGE   VERSION   INTERNAL-IP       EXTERNAL-IP   OS-IMAGE                                             KERNEL-VERSION           CONTAINER-RUNTIME
+fedora-coreos-worker  NotReady   <none>          4s    v1.32.3   192.168.124.103   <none>        Fedora CoreOS 41.20250302.3.2                        6.13.5-200.fc41.x86_64   cri-o://1.32.2
+flatcar-cp            NotReady   control-plane   23m   v1.32.2   192.168.124.254   <none>        Flatcar Container Linux by Kinvolk 4152.2.2 (Oklo)   6.6.83-flatcar           containerd://1.7.23
 ```
 
 If you want your nodes to be ready, you can deploy a simple CNI like calico:
