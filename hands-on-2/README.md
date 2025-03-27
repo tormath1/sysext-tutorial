@@ -10,15 +10,22 @@ If you are attending KubeCon London, you can connect to the lab system via SSH:
 ssh labuserX@WW.XX.YY.ZZ
 ```
 
-## Creating a sysext
+## Building a sysext
 
 **Make sure that you are only connected to the lab system before moving
 further. You don't need to connect to the Flacar Container Linux virtual
 machine yet.**
 
-In this hands-on, let's create a simple [CRI-O](https://cri-o.io/) system
+In this hands-on, we will build a simple [CRI-O](https://cri-o.io/) system
 extension. CRI-O is a container runtime for Kubernetes. It can be used as a
 containerd alternative.
+
+First, let's get the script that we will use to build the system extension:
+
+```
+labuserX@sysext-lab:~$ git clone https://github.com/tormath1/sysext-tutorial
+labuserX@sysext-lab:~$ cd sysext-tutorial/hands-on-2
+```
 
 Let's open the file `create_crio.sh`. As you can see, it is mostly a succession
 of "mkdir", "cd", "echo".
@@ -26,24 +33,15 @@ of "mkdir", "cd", "echo".
 We basically create a directory `usr/` and we put everything we need to run
 CRI-O inside this directory. This will be applied as an overlayfs on the OS.
 
-## Building the sysext
-
-From the main `sysext-lab` system, clone the Git repo with the script:
+Let's now build this system extension:
 
 ```
-git clone https://github.com/tormath1/sysext-tutorial
-cd sysext-tutorial/hands-on-2
-```
-
-Build the sysext:
-
-```
-./create_crio.sh
+labuserX@sysext-lab:~$ ./create_crio.sh
 ```
 
 ## Setting up a Flatcar Container Linux virtual machine
 
-We will now setup a Flatcar Container Linux system.
+We will now setup a Flatcar Container Linux virtual machine.
 
 If you are attending KubeCon London, you can create a Flatcar virtual machine
 using the command `launch_flatcar`:
@@ -62,30 +60,30 @@ Otherwise, you can provision a system on any platform, using the
 Get the IP address of the Flatcar Container Linux virtual machine:
 
 ```
-ip addr
+core@flatcar ~ $ ip addr
 ...
 ```
 
 Exit the Flatcar Container Linux virtual machine console with `Ctrl + ]`.
 
-Upload the sysext to the Flatcar instance and merge it to the system:
+Upload the sysext to the Flatcar instance:
 
 ```
-scp crio.raw core@WW.XX.YY.ZZ:crio.raw
+labuserX@sysext-lab:~$ scp crio.raw core@WW.XX.YY.ZZ:crio.raw
 ```
 
 Connect back to the Flatcar Container Linux virtual machine console:
 
 ```
-virsh console flatcar-labuserX
+labuserX@sysext-lab:~$ virsh console flatcar-labuserX
 ```
 
-Setup the systemd system extension:
+And then setup the systemd system extension and merge it to the system:
 
 ```
-sudo mv crio.raw /etc/extensions
+core@flatcar ~ $ sudo mv crio.raw /etc/extensions
 # Use 'refresh' and not 'merge' because some extensions are already loaded by default
-sudo systemd-sysext refresh
+core@flatcar ~ $ sudo systemd-sysext refresh
 ```
 
 ## Test CRI-O
@@ -93,19 +91,19 @@ sudo systemd-sysext refresh
 You have extended your Flatcar instance with a new container runtime:
 
 ```
-$ sudo crictl --runtime-endpoint unix:///run/crio/crio.sock version
+core@flatcar ~ $ sudo crictl --runtime-endpoint unix:///run/crio/crio.sock version
 Version:  0.1.0
 RuntimeName:  cri-o
 RuntimeVersion:  1.32.2
 RuntimeApiVersion:  v1
 
-$ sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock version
+core@flatcar ~ $ sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock version
 Version:  0.1.0
 RuntimeName:  containerd
 RuntimeVersion:  v1.7.23
 RuntimeApiVersion:  v1
 
-$ systemctl status crio
+core@flatcar ~ $ systemctl status crio
 ● crio.service - Container Runtime Interface for OCI (CRI-O)
      Loaded: loaded (/usr/lib/systemd/system/crio.service; disabled; preset: disabled)
     Drop-In: /usr/lib/systemd/system/crio.service.d
@@ -139,16 +137,14 @@ If you are attending KubeCon London, you can exit the Virtual Machine
 by shutting it down:
 
 ```
-sudo poweroff
+core@flatcar ~ $ sudo poweroff
 ```
 
 Or by disconnecting from the console with `Ctrl + ]` and then destroying the
 virtual machine:
 
 ```
-# Get the name of the virtual machine
-virsh list
-virsh destroy flatcar-labuserX
+labuserX@sysext-lab:~$ virsh destroy flatcar-labuserX
 ```
 
 ## Resources

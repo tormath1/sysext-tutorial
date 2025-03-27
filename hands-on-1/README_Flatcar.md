@@ -92,8 +92,7 @@ Hello KubeCon London 2025!
 
 ## Wrapping up the hands on
 
-If you are attending KubeCon London, you can exit the Virtual Machine
-by shutting it down:
+You can exit the Virtual Machine by shutting it down:
 
 ```
 core@flatcar ~ $ sudo poweroff

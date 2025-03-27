@@ -19,6 +19,8 @@ machine using the command `launch_fcos`:
 
 ```
 labuserX@sysext-lab:~$ launch_fcos
+...
+[core@fedora-coreos ~]$
 ```
 
 The password for the `core` user is `core`.
@@ -26,14 +28,21 @@ The password for the `core` user is `core`.
 Otherwise, you can provision a system on any platform, using the
 [documentation](https://docs.fedoraproject.org/en-US/fedora-coreos/).
 
-## Creating a sysext
+## Building a sysext
 
 **Make sure that you are connected to the Fedora CoreOS virtual machine
 launched above before moving further.**
 
-In this hands-on, let's create a simple [CRI-O](https://cri-o.io/) system
+In this hands-on, we will build a simple [CRI-O](https://cri-o.io/) system
 extension. CRI-O is a container runtime for Kubernetes. It can be used as a
 containerd alternative.
+
+First, let's get the script that we will use to build the system extension:
+
+```
+[core@fedora-coreos ~]$ git clone https://github.com/tormath1/sysext-tutorial
+[core@fedora-coreos ~]$ cd sysext-tutorial/hands-on-2
+```
 
 Let's open the file `create_crio_FedoraCoreOS.sh`. As you can see, it is mostly
 a succession of "mkdir", "cd", "echo".
@@ -42,31 +51,21 @@ We download and extract the Fedora RPM for CRI-O and crit-tools into a
 directory and setup a few configuration files. This will be applied as an
 overlayfs on the OS.
 
-## Building the sysext
 
-From the main `sysext-lab` system, clone the Git repo with the script:
-
-```
-git clone https://github.com/tormath1/sysext-tutorial
-cd sysext-tutorial/hands-on-2
-```
-
-Build the sysext:
+Let's now build this system extension:
 
 ```
-./create_crio_FedoraCoreOS.sh
+[core@fedora-coreos ~]$ ./create_crio_FedoraCoreOS.sh
 ```
 
-## Get the system extension to the Virtual Machine
+## Setup the system extension
 
-Upload the sysext to the Fedora CoreOS instance and merge it to the system:
+Setup the system extensions and merge it it to the system:
 
 ```
-scp crio.raw core@WW.XX.YY.ZZ:crio.raw
-ssh core@WW.XX.YY.ZZ
-sudo install -d -m 0755 -o 0 -g 0 -Z /var/lib/extensions
-sudo mv crio.raw /var/lib/extensions
-sudo systemctl restart systemd-sysext.service
+[core@fedora-coreos ~]$ sudo install -d -m 0755 -o 0 -g 0 -Z /var/lib/extensions
+[core@fedora-coreos ~]$ sudo mv crio.raw /var/lib/extensions
+[core@fedora-coreos ~]$ sudo systemctl restart systemd-sysext.service
 ```
 
 :warning: We can not use `sudo systemd-sysext merge` directly here as there is
@@ -78,14 +77,14 @@ only. This will be fixed once Fedora CoreOS moves to Fedora 42.
 You have extended your Fedora CoreOS instance with a new container runtime:
 
 ```
-$ sudo crictl --runtime-endpoint unix:///run/crio/crio.sock version
+[core@fedora-coreos ~]$ sudo crictl --runtime-endpoint unix:///run/crio/crio.sock version
 WARN[0000] Config "/etc/crictl.yaml" does not exist, trying next: "/usr/bin/crictl.yaml"
 Version:  0.1.0
 RuntimeName:  cri-o
 RuntimeVersion:  1.32.2
 RuntimeApiVersion:  v1
 
-$ systemctl status crio
+[core@fedora-coreos ~]$ systemctl status crio
 ● crio.service - Container Runtime Interface for OCI (CRI-O)
      Loaded: loaded (/usr/lib/systemd/system/crio.service; disabled; preset: disabled)
     Drop-In: /usr/lib/systemd/system/service.d
@@ -118,16 +117,14 @@ If you are attending KubeCon London, you can exit the Virtual Machine
 by shutting it down:
 
 ```
-sudo poweroff
+[core@fedora-coreos ~]$  sudo poweroff
 ```
 
 Or by disconnecting from the console with `Ctrl + ]` and then destroying the
 virtual machine:
 
 ```
-# Get the name of the virtual machine
-virsh list
-virsh destroy fcos-labuserX
+labuserX@sysext-lab:~$ virsh destroy fcos-labuserX
 ```
 
 ## Resources
