@@ -94,7 +94,7 @@ After a few seconds, the instance should be booted and the control-plane
 available (but not ready yet):
 
 ```
-core@flatcar ~ $ kubectl get nodes
+core@flatcar-cp ~ $ kubectl get nodes
 NAME        STATUS     ROLES           AGE   VERSION
 flatcar-cp  NotReady   control-plane   22s   v1.32.2
 ```
@@ -187,13 +187,14 @@ labuserX@sysext-lab:~$ virsh console flatcar-labuserX
 From the Flatcar instance, you can print the join command:
 
 ```
-core@flatcar ~ $ kubeadm token create --print-join-command
+core@flatcar-cp ~ $ kubeadm token create --print-join-command
 ```
 
-And on the Fedora CoreOS worker node, you can paste the result of the command above:
+And on the Fedora CoreOS worker node, you can paste the result of the command
+above:
 
 ```
-[core@fedora-coreos ~]$ sudo kubeadm join ...
+[core@fedora-coreos-worker ~]$ sudo kubeadm join ...
 ```
 
 Congratulations, you have deployed a Kubernetes cluster on Flatcar and Fedora
@@ -202,7 +203,7 @@ CoreOS using systemd system extensions!
 On the Flatcar instannce:
 
 ```
-core@flatcar ~ $ kubectl get nodes -o wide
+core@flatcar-cp ~ $ kubectl get nodes -o wide
 NAME                  STATUS     ROLES           AGE   VERSION   INTERNAL-IP       EXTERNAL-IP   OS-IMAGE                                             KERNEL-VERSION           CONTAINER-RUNTIME
 fedora-coreos-worker  NotReady   <none>          4s    v1.32.3   192.168.124.103   <none>        Fedora CoreOS 41.20250302.3.2                        6.13.5-200.fc41.x86_64   cri-o://1.32.2
 flatcar-cp            NotReady   control-plane   23m   v1.32.2   192.168.124.254   <none>        Flatcar Container Linux by Kinvolk 4152.2.2 (Oklo)   6.6.83-flatcar           containerd://1.7.23
@@ -211,20 +212,20 @@ flatcar-cp            NotReady   control-plane   23m   v1.32.2   192.168.124.254
 If you want your nodes to be ready, you can deploy a simple CNI like calico:
 
 ```
-core@flatcar ~ $ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/calico.yaml
+core@flatcar-cp ~ $ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/calico.yaml
 ```
 
 Then tag the worker node:
 
 ```
-core@flatcar ~ $ kubectl label node fedora-coreos-worker node-role.kubernetes.io/worker=worker
+core@flatcar-cp ~ $ kubectl label node fedora-coreos-worker node-role.kubernetes.io/worker=worker
 ```
 
 And then deploy an example application:
 
 ```
-core@flatcar ~ $ kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
-core@flatcar ~ $ kubectl get pods -o wide
+core@flatcar-cp ~ $ kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+core@flatcar-cp ~ $ kubectl get pods -o wide
 ```
 
 ## Wrapping up the hands on
@@ -232,7 +233,7 @@ core@flatcar ~ $ kubectl get pods -o wide
 You can exit any Virtual Machine by shutting it down:
 
 ```
-$ sudo poweroff
+core@flatcar-cp ~ $ sudo poweroff
 ```
 
 Or by disconnecting from the console with `Ctrl + ]` and then destroying the
