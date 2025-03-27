@@ -2,25 +2,19 @@
 
 [![asciicast](https://asciinema.org/a/707977.svg)](https://asciinema.org/a/707977)
 
-## Setting up a Flatcar Container Linux virtual machine
+## Connecting to the lab system
 
-For this hands on, we will be using a Flatcar system.
-
-If you are attending KubeCon London, you can connect to the lab system via SSH
-and then create a Flatcar virtual machine using the command `launch_flatcar`:
+If you are attending KubeCon London, you can connect to the lab system via SSH:
 
 ```
 ssh labuserX@WW.XX.YY.ZZ
-...
-labuserX@sysext-lab:~$ launch_flatcar
 ```
 
-The password for the `core` user is `core`.
-
-Otherwise, you can provision a system on any platform, using the
-[documentation](https://www.flatcar.org/docs/latest/installing/).
-
 ## Creating a sysext
+
+**Make sure that you are only connected to the lab system before moving
+further. You don't need to connect to the Flacar Container Linux virtual
+machine yet.**
 
 In this hands-on, let's create a simple [CRI-O](https://cri-o.io/) system
 extension. CRI-O is a container runtime for Kubernetes. It can be used as a
@@ -47,12 +41,48 @@ Build the sysext:
 ./create_crio.sh
 ```
 
+## Setting up a Flatcar Container Linux virtual machine
+
+We will now setup a Flatcar Container Linux system.
+
+If you are attending KubeCon London, you can create a Flatcar virtual machine
+using the command `launch_flatcar`:
+
+```
+labuserX@sysext-lab:~$ launch_flatcar
+```
+
+The password for the `core` user is `core`.
+
+Otherwise, you can provision a system on any platform, using the
+[documentation](https://www.flatcar.org/docs/latest/installing/).
+
 ## Get the system extension to the Virtual Machine
 
+Get the IP address of the Flatcar Container Linux virtual machine:
+
+```
+ip addr
+...
+```
+
+Exit the Flatcar Container Linux virtual machine console with `Ctrl + ]`.
+
 Upload the sysext to the Flatcar instance and merge it to the system:
+
 ```
 scp crio.raw core@WW.XX.YY.ZZ:crio.raw
-ssh core@WW.XX.YY.ZZ
+```
+
+Connect back to the Flatcar Container Linux virtual machine console:
+
+```
+virsh console flatcar-labuserX
+```
+
+Setup the systemd system extension:
+
+```
 sudo mv crio.raw /etc/extensions
 # Use 'refresh' and not 'merge' because some extensions are already loaded by default
 sudo systemd-sysext refresh
@@ -101,6 +131,24 @@ Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.627688995Z" leve
 Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.627743385Z" level=info msg="Synchronizing NRI (plugin) with current runtime state"
 Mar 13 14:26:57 localhost crio[1794]: time="2025-03-13T14:26:57.627951853Z" level=info msg="No systemd watchdog enabled"
 Mar 13 14:26:57 localhost systemd[1]: Started crio.service - Container Runtime Interface for OCI (CRI-O).
+```
+
+## Wrapping up the hands on
+
+If you are attending KubeCon London, you can exit the Virtual Machine
+by shutting it down:
+
+```
+sudo poweroff
+```
+
+Or by disconnecting from the console with `Ctrl + ]` and then destroying the
+virtual machine:
+
+```
+# Get the name of the virtual machine
+virsh list
+virsh destroy flatcar-labuserX
 ```
 
 ## Resources

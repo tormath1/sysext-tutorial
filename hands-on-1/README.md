@@ -2,16 +2,22 @@
 
 [![asciicast](https://asciinema.org/a/710119.svg)](https://asciinema.org/a/710119)
 
+## Connecting to the lab system
+
+If you are attending KubeCon London, you can connect to the lab system via SSH:
+
+```
+ssh labuserX@WW.XX.YY.ZZ
+```
+
 ## Setting up a Fedora CoreOS virtual machine
 
 For this hands on, we will be using a Fedora CoreOS system.
 
-If you are attending KubeCon London, you can connect to the lab system via SSH
-and then create a Fedora CoreOS virtual machine using the command `launch_fcos`:
+If you are attending KubeCon London, you can create a Fedora CoreOS virtual
+machine using the command `launch_fcos`:
 
 ```
-ssh labuserX@WW.XX.YY.ZZ
-...
 labuserX@sysext-lab:~$ launch_fcos
 ```
 
@@ -21,6 +27,9 @@ Otherwise, you can provision a system on any platform, using the
 [documentation](https://docs.fedoraproject.org/en-US/fedora-coreos/).
 
 ## Getting the system extension
+
+**Make sure that you are connected to the Fedora CoreOS virtual machine
+launched above before moving further.**
 
 Let's first download a simple sysext image that includes
 [`wastime`](https://wasmtime.dev/):
@@ -81,6 +90,24 @@ $ wasmtime run --dir=$PWD::/ wasi_hello_world.wasm
 Hello KubeCon London 2025!
 $ cat helloworld/helloworld.txt
 Hello KubeCon London 2025!
+```
+
+## Wrapping up the hands on
+
+If you are attending KubeCon London, you can exit the Virtual Machine
+by shutting it down:
+
+```
+sudo poweroff
+```
+
+Or by disconnecting from the console with `Ctrl + ]` and then destroying the
+virtual machine:
+
+```
+# Get the name of the virtual machine
+virsh list
+virsh destroy fcos-labuserX
 ```
 
 ## Resources

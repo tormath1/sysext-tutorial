@@ -2,16 +2,22 @@
 
 [![asciicast](https://asciinema.org/a/710127.svg)](https://asciinema.org/a/710127)
 
+## Connecting to the lab system
+
+If you are attending KubeCon London, you can connect to the lab system via SSH:
+
+```
+ssh labuserX@WW.XX.YY.ZZ
+```
+
 ## Setting up a Fedora CoreOS virtual machine
 
 For this hands on, we will be using a Fedora CoreOS system.
 
-If you are attending KubeCon London, you can connect to the lab system via SSH
-and then create a Fedora CoreOS virtual machine using the command `launch_fcos`:
+If you are attending KubeCon London, you can create a Fedora CoreOS virtual
+machine using the command `launch_fcos`:
 
 ```
-ssh labuserX@WW.XX.YY.ZZ
-...
 labuserX@sysext-lab:~$ launch_fcos
 ```
 
@@ -21,6 +27,9 @@ Otherwise, you can provision a system on any platform, using the
 [documentation](https://docs.fedoraproject.org/en-US/fedora-coreos/).
 
 ## Creating a sysext
+
+**Make sure that you are connected to the Fedora CoreOS virtual machine
+launched above before moving further.**
 
 In this hands-on, let's create a simple [CRI-O](https://cri-o.io/) system
 extension. CRI-O is a container runtime for Kubernetes. It can be used as a
@@ -101,6 +110,24 @@ Mar 26 18:49:42 localhost.localdomain crio[3236]: time="2025-03-26T18:49:42.1375
 Mar 26 18:50:12 localhost.localdomain crio[3236]: time="2025-03-26T18:50:12.142069846Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
 Mar 26 18:50:42 localhost.localdomain crio[3236]: time="2025-03-26T18:50:42.143358305Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
 Mar 26 18:51:12 localhost.localdomain crio[3236]: time="2025-03-26T18:51:12.145588077Z" level=warning msg="CNI plugin not yet initialized. Ignoring NetworkReady status: false, message: Network plugin returns error: no CNI configuration file in /etc/cni/net.d/. Has your network provider started?, reason: NetworkPluginNotReady"
+```
+
+## Wrapping up the hands on
+
+If you are attending KubeCon London, you can exit the Virtual Machine
+by shutting it down:
+
+```
+sudo poweroff
+```
+
+Or by disconnecting from the console with `Ctrl + ]` and then destroying the
+virtual machine:
+
+```
+# Get the name of the virtual machine
+virsh list
+virsh destroy fcos-labuserX
 ```
 
 ## Resources

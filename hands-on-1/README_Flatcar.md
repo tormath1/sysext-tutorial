@@ -2,16 +2,22 @@
 
 [![asciicast](https://asciinema.org/a/706911.svg)](https://asciinema.org/a/706911)
 
-## Setting up a Flatcar Container Linux virtual machine
+## Connecting to the lab system
 
-For this hands on, we will be using a Flatcar system.
-
-If you are attending KubeCon London, you can connect to the lab system via SSH
-and then create a Flatcar virtual machine using the command `launch_flatcar`:
+If you are attending KubeCon London, you can connect to the lab system via SSH:
 
 ```
 ssh labuserX@WW.XX.YY.ZZ
-...
+```
+
+## Setting up a Fedora CoreOS virtual machine
+
+For this hands on, we will be using a Fedora CoreOS system.
+
+If you are attending KubeCon London, you can create a Flatcar Container Linux
+virtual machine using the command `launch_fcos`:
+
+```
 labuserX@sysext-lab:~$ launch_flatcar
 ```
 
@@ -21,6 +27,9 @@ Otherwise, you can provision a system on any platform, using the
 [documentation](https://www.flatcar.org/docs/latest/installing/).
 
 ## Getting the system extension
+
+**Make sure that you are connected to the Flatcar Container Linux virtual
+machine launched above before moving further.**
 
 Let's first download a simple sysext image that includes
 [`wastime`](https://wasmtime.dev/):
@@ -77,6 +86,24 @@ $ wasmtime run --dir=$PWD::/ wasi_hello_world.wasm
 Hello KubeCon London 2025!
 $ cat helloworld/helloworld.txt
 Hello KubeCon London 2025!
+```
+
+## Wrapping up the hands on
+
+If you are attending KubeCon London, you can exit the Virtual Machine
+by shutting it down:
+
+```
+sudo poweroff
+```
+
+Or by disconnecting from the console with `Ctrl + ]` and then destroying the
+virtual machine:
+
+```
+# Get the name of the virtual machine
+virsh list
+virsh destroy flatcars-labuserX
 ```
 
 ## Resources
