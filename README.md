@@ -7,7 +7,7 @@ By default, the first hands on features Fedora CoreOS, the second Flatcar
 Container Linux and the third both. All hands on are available for both Flatcar
 Container Linux and Fedora CoreOS so you can pick either operating system.
 
-* [Hands-on 1: Use a sysext on Fedora CoreOS](./hands-on-1)
+* [Hands-on 1: Use a sysext (wasmtime) on Fedora CoreOS](./hands-on-1)
 * [Hands-on 2: Build a sysext for CRI-O for Flatcar Container Linux](./hands-on-2)
 * [Hands-on 3: Setup a small Kubernetes Cluster with Flatcar and Fedora CoreOS nodes, using sysexts](./hands-on-3)
 
