@@ -208,7 +208,7 @@ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/
 Then tag the worker node:
 
 ```
-kubectl label node fcos-worker-01 node-role.kubernetes.io/worker=worker
+kubectl label node fedora-coreos-worker node-role.kubernetes.io/worker=worker
 ```
 
 And then deploy an example application:
