@@ -71,7 +71,7 @@ systemd-sysext status
 
 :warning: We can not use `sudo systemd-sysext merge` directly here as there is
 an incompatibility between systemd and SELinux that is fixed in systemd v257
-only.
+only. This will be fixed once Fedora CoreOS moves to Fedora 42.
 
 ## Testing out wasmtime
 
