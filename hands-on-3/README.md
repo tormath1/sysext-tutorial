@@ -124,7 +124,7 @@ storage:
   files:
     - path: "/var/lib/extensions.d/kubernetes-v1.32.raw"
       contents:
-        source: "https://github.com/travier/fedora-sysexts/releases/download/fedora-coreos-stable/kubernetes-cri-o-1.32-41.20250302.3.2-x86-64.raw"
+        source: "https://github.com/travier/fedora-sysexts/releases/download/kubernetes-cri-o-1.32-1.32.7-1.fc42-42-x86-64/kubernetes-cri-o-1.32-1.32.7-1.fc42-42-x86-64.raw"
     - path: "/etc/sysctl.d/kubernetes.conf"
       contents:
         inline: |

@@ -36,7 +36,7 @@ Let's first download a simple sysext image that includes
 [`wastime`](https://wasmtime.dev/):
 
 ```bash
-[core@fedora-coreos ~]$ curl -O --location https://github.com/travier/fedora-sysexts/releases/download/fedora-coreos-stable/wasmtime-41.20250302.3.2-x86-64.raw
+[core@fedora-coreos ~]$ curl -O --location https://github.com/travier/fedora-sysexts/releases/download/wasmtime-31.0.0-42-x86-64/wasmtime-31.0.0-42-x86-64.raw
 ```
 
 ## Inspecting its content
@@ -45,7 +45,7 @@ Before merging the system extension with the system, we can inspect the content
 of the image:
 
 ```
-[core@fedora-coreos ~]$ sudo systemd-dissect --list wasmtime-41.20250302.3.2-x86-64.raw
+[core@fedora-coreos ~]$ sudo systemd-dissect --list wasmtime-31.0.0-42-x86-64.raw
 ```
 
 ## Setting up the system extension
@@ -55,7 +55,7 @@ into account by `systemd-sysext`:
 
 ```
 [core@fedora-coreos ~]$ sudo install -d -m 0755 -o 0 -g 0 -Z /var/lib/extensions
-[core@fedora-coreos ~]$ sudo mv wasmtime-41.20250302.3.2-x86-64.raw /var/lib/extensions/wasmtime.raw
+[core@fedora-coreos ~]$ sudo mv wasmtime-* /var/lib/extensions/wasmtime.raw
 ```
 
 :warning: The name of the image must match the name the extension name (i.e the
@@ -88,9 +88,9 @@ Then let's get an example WASI application and run it with `wasmtime`:
 [core@fedora-coreos ~]$ curl -O --location https://github.com/tormath1/sysext-tutorial/raw/refs/heads/main/hands-on-1/wasi_hello_world.wasm
 [core@fedora-coreos ~]$ mkdir helloworld
 [core@fedora-coreos ~]$ wasmtime run --dir=$PWD::/ wasi_hello_world.wasm
-Hello KubeCon London 2025!
+Hello FrOSCon 2025!
 [core@fedora-coreos ~]$ cat helloworld/helloworld.txt
-Hello KubeCon London 2025!
+Hello FrOSCon 2025!
 ```
 
 ## Wrapping up the hands on

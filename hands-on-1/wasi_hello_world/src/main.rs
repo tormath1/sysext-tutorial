@@ -7,7 +7,7 @@ fn main() {
 
   // Print out hello world!
   // This will handle writing to stdout for us using the WASI APIs (e.g fd_write)
-  println!("Hello KubeCon London 2025!");
+  println!("Hello FrOSCon 2025!");
 
   // Create a file
   // We are creating a `helloworld.txt` file in the `/helloworld` directory
@@ -19,5 +19,5 @@ fn main() {
   let mut file = fs::File::create("/helloworld/helloworld.txt").unwrap();
 
   // Write the text to the file we created
-  write!(file, "Hello KubeCon London 2025!\n").unwrap();
+  write!(file, "Hello FrOSCon 2025!\n").unwrap();
 }

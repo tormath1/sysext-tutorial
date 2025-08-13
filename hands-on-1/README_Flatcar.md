@@ -85,9 +85,9 @@ Then let's get an example WASI application and run it with `wasmtime`:
 core@flatcar ~ $ curl -O --location https://github.com/tormath1/sysext-tutorial/raw/refs/heads/main/hands-on-1/wasi_hello_world.wasm
 core@flatcar ~ $ mkdir helloworld
 core@flatcar ~ $ wasmtime run --dir=$PWD::/ wasi_hello_world.wasm
-Hello KubeCon London 2025!
+Hello FrOSCon 2025!
 core@flatcar ~ $ cat helloworld/helloworld.txt
-Hello KubeCon London 2025!
+Hello FrOSCon 2025!
 ```
 
 ## Wrapping up the hands on
